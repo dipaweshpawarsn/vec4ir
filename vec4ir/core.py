@@ -8,7 +8,7 @@ import scipy.sparse as sp
 try:
     from .base import RetriEvalMixin
 except SystemError:
-    from base import RetriEvalMixin
+    from .base import RetriEvalMixin
 from sklearn.decomposition import PCA
 
 
@@ -53,6 +53,8 @@ class Retrieval(BaseEstimator, MetaEstimatorMixin, RetriEvalMixin):
             matching.fit(X)
 
         retrieval_model.fit(X)
+        return self
+
 
     def query(self, q, k=None, return_scores=False):
         labels = self.labels_
@@ -68,6 +70,7 @@ class Retrieval(BaseEstimator, MetaEstimatorMixin, RetriEvalMixin):
         if matching:
             ind = matching.predict(q)
             print('{} documents matched.'.format(len(ind)))
+
             if len(ind) == 0:
                 if return_scores:
                     return [], []
@@ -109,10 +112,10 @@ class EmbeddedVectorizer(TfidfVectorizer):
     def __init__(self, embedding, **kwargs):
         """TODO: to be defined1. """
         # list of words in the embedding
-        vocabulary = embedding.index2word if embedding is not None else None
+
+        vocabulary = embedding.index2word
         self.embedding = embedding
-        if embedding is not None:
-            print("Embedding shape:", embedding.syn0.shape)
+        print("Embedding shape:", embedding.syn0.shape)
         TfidfVectorizer.__init__(self, vocabulary=vocabulary, **kwargs)
 
     def fit(self, raw_docs, y=None):

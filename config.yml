@@ -11,7 +11,11 @@ embeddings:
 
 
     word2vec:
+<<<<<<< HEAD
         path: "D:/GoogleNews-vectors-negative300.bin.gz"
+=======
+        path: "/data3/lgalke/GoogleNews-vectors-negative300.bin.gz"
+>>>>>>> origin/master
         oov_token: "UNK"  # not so wild guess
         analyzer:
             lowercase: False
@@ -77,9 +81,12 @@ data:
         field: "content"
         topic: "description"
         rels: 2
+<<<<<<< HEAD
 
     springer:
         type: "QuadflorLike"
         X: "D:/vec4ir_data/chapters_0_full_text_splitaa_processed.csv"
         y:
         thes:
+=======
+>>>>>>> origin/master

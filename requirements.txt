@@ -9,7 +9,10 @@ networkx
 nltk
 numpy
 pandas
+<<<<<<< HEAD
 pyemd
+=======
+>>>>>>> origin/master
 pyparsing
 python-dateutil
 pytz
@@ -22,3 +25,7 @@ six
 sklearn
 smart-open
 joblib
+<<<<<<< HEAD
+=======
+pytest
+>>>>>>> origin/master

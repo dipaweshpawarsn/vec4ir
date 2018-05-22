@@ -2,7 +2,7 @@ from gensim.models import Doc2Vec
 try:
     from .base import RetriEvalMixin, Matching, argtopk
 except SystemError:
-    from base import RetriEvalMixin, Matching, argtopk
+    from .base import RetriEvalMixin, Matching, argtopk
 # from .word2vec import filter_vocab
 from gensim.models.doc2vec import TaggedDocument
 from sklearn.base import BaseEstimator

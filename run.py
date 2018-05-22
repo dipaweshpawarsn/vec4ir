@@ -14,6 +14,7 @@ VALID_RETRIEVAL_MODELS = ('tfidf', 'wcd', 'wmd', 'd2v')
 SEPARATOR = ','
 
 def load_documents(path, with_identifiers=True):
+
     documents = []
     if os.path.isdir(path):
         # Read all files of directory
@@ -38,14 +39,15 @@ def load_documents(path, with_identifiers=True):
             #     documents.append((fname, fcontent))
             # else:
             #     documents.append(fcontent)
+
     elif os.path.isfile(path):
         with open(path, 'r') as fhandle:
             for line in fhandle:
                 line = line.strip()
                 if with_identifiers:
                     # use first column as identifier
-                    identifier, docType, content = line.split(SEPARATOR)
-                    documents.append((docType, content))
+                    identifier, content = line.split(SEPARATOR)
+                    documents.append((identifier, content))
                 else:
                     # just use full line as content
                     documents.append(line)
@@ -62,7 +64,6 @@ def load_documents(path, with_identifiers=True):
 
 def run(args, inputs):
 
-    print("Retrieval Model: "+args.retrieval_model)
     analyzer = build_analyzer(tokenizer=args.tokenizer,
                                        stop_words=args.stop_words,
                                        lowercase=args.lowercase)
@@ -134,7 +135,6 @@ def main():
     parser = ArgumentParser()
     parser.add_argument("-d", "--data", type=str, default=None,
                         help="Path to data directory or csv file")
-
     parser.add_argument("-r", "--retrieval-model", type=str, default='tfidf',
                         choices=VALID_RETRIEVAL_MODELS)
     parser.add_argument("-e", "--embedding", type=str, default=None,
@@ -178,15 +178,12 @@ def main():
                                     help="number of documents to retrieve")
 
     args, inputs = parser.parse_known_args()
-    # print(args.retrieval_model)
+
     if args.retrieval_model is not 'tfidf' and args.embedding is None:
-        print(parser.usage)
-        print("Please specify an embedding (-e) when retrieval model is not tfidf")
-        exit(1)
+        raise ValueError("An embedding (-e) is mandatory when retrieval model is not tfidf")
+
 
     run(args, inputs)
-
-
 
 if __name__ == '__main__':
     main()
