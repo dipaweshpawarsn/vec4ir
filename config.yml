@@ -81,12 +81,3 @@ data:
         field: "content"
         topic: "description"
         rels: 2
-<<<<<<< HEAD
-
-    springer:
-        type: "QuadflorLike"
-        X: "D:/vec4ir_data/chapters_0_full_text_splitaa_processed.csv"
-        y:
-        thes:
-=======
->>>>>>> origin/master
